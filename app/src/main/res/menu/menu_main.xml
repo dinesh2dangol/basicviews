@@ -4,7 +4,19 @@
     tools:context="com.example.basicviews.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="500"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_refresh"
+        android:orderInCategory="200"
+        android:icon="@android:drawable/ic_popup_sync"
+        android:title="@string/action_refresh"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="300"
+        android:title="@string/action_about"
+        app:showAsAction="never" />
+
 </menu>
