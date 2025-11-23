@@ -73,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_about) {
-            navController.navigate(R.id.ThirdFragment);  // <-- navigate here!
-            Snackbar.make(binding.getRoot(), "BasicViews App v1.0", Snackbar.LENGTH_SHORT).show();
+            showAboutDialog();
             return true;
         }
 
@@ -87,4 +86,18 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    private void showAboutDialog() {
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                .setTitle("About This App")
+                .setMessage(
+                        "BasicViews App\n\n" +
+                                "Version: 1.0\n" +
+                                "Developer: Your Name\n\n" +
+                                "This is a simple Android app demonstrating fragments, navigation, and menus."
+                )
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
 }
