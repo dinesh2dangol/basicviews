@@ -13,6 +13,11 @@
         android:theme="@style/Theme.BasicViews">
         <activity
             android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_tabbed_view"
+            android:theme="@style/Theme.BasicViews.NoActionBar" />
+        <activity
+            android:name=".TabbedView"
             android:exported="true"
             android:theme="@style/Theme.BasicViews">
             <intent-filter>
