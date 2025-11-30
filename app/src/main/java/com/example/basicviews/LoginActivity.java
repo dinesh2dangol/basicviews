@@ -2,6 +2,7 @@ package com.example.basicviews;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -49,9 +50,13 @@ public class LoginActivity extends AppCompatActivity {
 
                     LoginResponse login = response.body();
 
-                    Toast.makeText(LoginActivity.this,
-                            "Logged in as: " + login.username,
-                            Toast.LENGTH_LONG).show();
+//                    Toast.makeText(LoginActivity.this,
+//                            "Logged in as: " + login.username,
+//                            Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginActivity.this, CategoriesActivity.class);
+                    startActivity(intent);
+                    finish();
+
 
                 } else {
                     Toast.makeText(LoginActivity.this,
