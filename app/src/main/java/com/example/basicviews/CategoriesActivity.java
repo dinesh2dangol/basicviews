@@ -1,6 +1,8 @@
 package com.example.basicviews;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -32,20 +34,6 @@ public class CategoriesActivity extends AppCompatActivity {
         loadCategories();
     }
 
-    private void loadCategories2() {
-
-        List<String> names = new ArrayList<>();
-        names.add("Apple");
-        names.add("Banana");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                CategoriesActivity.this,
-                android.R.layout.simple_list_item_1,
-                names
-        );
-
-        listView.setAdapter(adapter);
-    }
     private void loadCategories() {
         ApiService apiService = RetrofitClient.getApi();
 
@@ -78,6 +66,15 @@ public class CategoriesActivity extends AppCompatActivity {
                     );
 
                     listView.setAdapter(adapter);
+
+                    listView.setOnItemClickListener((parent, view, position, id) -> {
+                        String selectedCategory = names.get(position);
+                        Toast.makeText(CategoriesActivity.this, selectedCategory, Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(CategoriesActivity.this, ProductsActivity.class);
+                        intent.putExtra("categoryName", selectedCategory);
+                        startActivity(intent);
+                    });
                 }
             }
 
