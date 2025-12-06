@@ -2,6 +2,7 @@ package com.example.basicviews;
 
 import android.os.Bundle;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAboutDialog() {
-        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setTitle("About This App")
                 .setMessage(
                         "BasicViews App\n\n" +
@@ -96,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
                                 "Developer: Your Name\n\n" +
                                 "This is a simple Android app demonstrating fragments, navigation, and menus."
                 )
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("OK", (dialog, which) -> { })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                 .show();
     }
 
