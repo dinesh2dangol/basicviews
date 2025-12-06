@@ -28,9 +28,21 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact);
 
         TextView t1=(TextView) findViewById(R.id.textView1);
-        t1.setText("Text changed");
 
         Button b1 = (Button) findViewById(R.id.button1);
-        b1.setText("SunFun");
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                t1.setText("7:00-10:00: MAD");
+            }
+        });
+
+        Button b2 = (Button) findViewById(R.id.button2);
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                t1.setText("7:00-10:00: Economics\n10:00-11:00: Break\n12:00-13:00: PP");
+            }
+        });
     }
 }
