@@ -1,22 +1,16 @@
 package com.example.basicviews;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 
 import com.example.basicviews.databinding.ActivityContactBinding;
-import com.example.basicviews.databinding.ActivityMainBinding;
-
-import org.w3c.dom.Text;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ContactActivity extends AppCompatActivity {
     private ActivityContactBinding binding;
@@ -28,6 +22,7 @@ public class ContactActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_contact);
         binding = ActivityContactBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
 
 
         binding.button1.setOnClickListener(new View.OnClickListener() {
@@ -43,5 +38,31 @@ public class ContactActivity extends AppCompatActivity {
                 binding.textView1.setText("7:00-10:00: Economics\n10:00-11:00: Break\n12:00-13:00: PP");
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_contact, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Snackbar.make(binding.getRoot(),
+                    "Routine settings",
+                    Snackbar.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.action_about) {
+            Snackbar.make(binding.getRoot(),
+                    "About Us",
+                    Snackbar.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
