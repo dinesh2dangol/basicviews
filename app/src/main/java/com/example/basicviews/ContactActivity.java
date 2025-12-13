@@ -1,5 +1,6 @@
 package com.example.basicviews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +25,6 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-
         binding.button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +38,7 @@ public class ContactActivity extends AppCompatActivity {
                 binding.textView1.setText("7:00-10:00: Economics\n10:00-11:00: Break\n12:00-13:00: PP");
             }
         });
+
     }
 
     @Override
@@ -58,10 +59,9 @@ public class ContactActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_about) {
-            Snackbar.make(binding.getRoot(),
-                    "About Us",
-                    Snackbar.LENGTH_SHORT).show();
-            return true;
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("today","Sun");
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
