@@ -66,8 +66,9 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string-array name="options">
-        <item>Drinks</item>
+        <item>Soft Drinks</item>
         <item>Food</item>
         <item>Stores</item>
+        <item>Colleges</item>
     </string-array>
 </resources>
