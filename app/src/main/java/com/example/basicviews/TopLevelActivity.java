@@ -1,5 +1,6 @@
 package com.example.basicviews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,8 +24,11 @@ public class TopLevelActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0)
                     Toast.makeText(TopLevelActivity.this,"Drink", Toast.LENGTH_SHORT).show();
-                if(position==1)
-                    Toast.makeText(TopLevelActivity.this, "You pressed second item", Toast.LENGTH_SHORT).show();
+                if(position==1){
+                    Intent intent = new Intent(TopLevelActivity.this, FoodActivity.class);
+                    intent.putExtra("name","Ram");
+                    startActivity(intent);
+                }
             }
         };
         ListView listView = (ListView) findViewById(R.id.list_options);

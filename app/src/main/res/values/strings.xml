@@ -71,4 +71,8 @@
         <item>Stores</item>
         <item>Colleges</item>
     </string-array>
+    <string-array name="food_options">
+        <item>Momo</item>
+        <item>Fried Rice</item>
+    </string-array>
 </resources>
