@@ -53,10 +53,12 @@ public class ContactActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Snackbar.make(binding.getRoot(),
-                    "Routine settings",
-                    Snackbar.LENGTH_SHORT).show();
-            return true;
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_TEXT, "hello");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "test");
+            intent.setType("text/plain");
+            startActivity(intent);
+
         }
         if (id == R.id.action_about) {
             Intent intent = new Intent(this, MainActivity.class);
