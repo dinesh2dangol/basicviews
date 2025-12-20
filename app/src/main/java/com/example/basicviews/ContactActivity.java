@@ -1,12 +1,15 @@
 package com.example.basicviews;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -53,11 +56,17 @@ public class ContactActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.putExtra(Intent.EXTRA_TEXT, "hello");
-            intent.putExtra(Intent.EXTRA_SUBJECT, "test");
-            intent.setType("text/plain");
-            startActivity(intent);
+            final CharSequence[] items = {"Red","Blue"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("test");
+            builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getApplicationContext(), items[which], Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            builder.show();
 
         }
         if (id == R.id.action_about) {
