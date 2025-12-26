@@ -14,20 +14,35 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class TopLevelActivity extends AppCompatActivity {
-
+    private DBHelper mydb ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_level);
+        mydb = new DBHelper(this);
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0)
                     Toast.makeText(TopLevelActivity.this,"Drink", Toast.LENGTH_SHORT).show();
-                if(position==1){
+                else if(position==1){
                     Intent intent = new Intent(TopLevelActivity.this, FoodActivity.class);
                     intent.putExtra("name","Ram");
                     startActivity(intent);
+                }
+                else if(position==2){
+                    Bundle dataBundle = new Bundle();
+                    dataBundle.putInt("id", 0);
+
+                    Intent intent = new Intent(getApplicationContext(),DisplayActivity.class);
+                    intent.putExtras(dataBundle);
+
+                    startActivity(intent);
+                }
+                else {
+                    int n = mydb.numberOfRows();
+                    Toast.makeText(getApplicationContext(),"n:"+n, Toast.LENGTH_SHORT).show();
+//                    mydb.insertContact("Ram","9841","email","Kathmandu","Bhotebahal");
                 }
             }
         };
