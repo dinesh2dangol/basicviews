@@ -1,14 +1,18 @@
 package com.example.basicviews;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +42,7 @@ public class NotificationActivity extends AppCompatActivity {
         }
 
         // 2️⃣ Intent when notification is clicked
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, FoodActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(
                 this,
                 0,
@@ -71,20 +75,37 @@ public class NotificationActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (android.os.Build.VERSION.SDK_INT >= 33) {
-                    if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        requestPermissions(
-                                new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
-                                100
-                        );
-                        return; // wait for user response
-                    }
+
+                if (isInternetAvailable(getApplicationContext())) {
+                    // Safe to make API calls
+                    Toast.makeText(getApplicationContext(),"available", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Show "No Internet connection"
+                    Toast.makeText(getApplicationContext(),"not available", Toast.LENGTH_SHORT).show();
                 }
 
-                addNotification();
+
+
+
+
+//                addNotification();
             }
         });
     }
+
+    public boolean isInternetAvailable(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (cm == null) return false;
+
+        NetworkCapabilities capabilities =
+                cm.getNetworkCapabilities(cm.getActiveNetwork());
+
+        return capabilities != null &&
+                capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+    }
+
 
 }
