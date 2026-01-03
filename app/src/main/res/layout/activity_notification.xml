@@ -14,5 +14,11 @@
         android:id="@+id/button_notify"
         android:text="Notify"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_notify1"
+        android:text="Notify"/>
+
 
 </LinearLayout>
