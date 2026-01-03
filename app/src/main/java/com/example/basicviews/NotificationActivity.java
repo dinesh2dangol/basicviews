@@ -31,6 +31,10 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class NotificationActivity extends AppCompatActivity {
     Button b1;
     TextView tv1;
@@ -97,7 +101,7 @@ public class NotificationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"not available", Toast.LENGTH_SHORT).show();
                     tv1.setText("internet not available");
                 }
-                fetchJson();
+                fetchProduct();
 
                 //adb shell svc wifi enable
                 //adb shell svc data enable
@@ -123,6 +127,38 @@ public class NotificationActivity extends AppCompatActivity {
         return capabilities != null &&
                 capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                 capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+    }
+    private void fetchProduct() {
+
+        ApiService apiService =
+                RetrofitClient.getInstance().create(ApiService.class);
+
+        Call<Product> call = apiService.getProduct();
+
+        call.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    Product product = response.body();
+
+                    String result =
+                            "ID: " + product.getId() + "\n\n" +
+                                    "Title: " + product.getTitle() + "\n\n" +
+                                    "Description: " + product.getDescription() + "\n\n" +
+                                    "Price: $" + product.getPrice();
+
+                    tv1.setText(result);
+                } else {
+                    tv1.setText("Response error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                tv1.setText("Failed: " + t.getMessage());
+            }
+        });
     }
 
     private void fetchJson() {
