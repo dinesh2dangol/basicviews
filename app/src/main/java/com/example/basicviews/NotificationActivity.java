@@ -84,6 +84,9 @@ public class NotificationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"not available", Toast.LENGTH_SHORT).show();
                 }
 
+                //adb shell svc wifi enable
+                //adb shell svc data enable
+
 
 
 
