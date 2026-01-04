@@ -80,16 +80,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public ArrayList<String> getAllContacts() {
-        ArrayList<String> contactList = new ArrayList<>();
+    public ArrayList<Contact> getAllContacts() {
+        ArrayList<Contact> contactList = new ArrayList<>();
+
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + CONTACTS_TABLE_NAME, null);
 
         if (cursor.moveToFirst()) {
             do {
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
                 String name = cursor.getString(cursor.getColumnIndex("name"));
                 String phone = cursor.getString(cursor.getColumnIndex("phone"));
-                contactList.add(name + " - " + phone);
+                contactList.add(new Contact(id, name, phone));
             } while (cursor.moveToNext());
         }
 

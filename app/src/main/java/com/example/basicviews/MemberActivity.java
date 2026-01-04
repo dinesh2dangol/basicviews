@@ -27,8 +27,8 @@ public class MemberActivity extends AppCompatActivity {
         loadContacts();
     }
     private void loadContacts() {
-        ArrayList<String> contacts = dbHelper.getAllContacts();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, contacts);
+        ArrayList<Contact> contacts = dbHelper.getAllContacts();
+        ArrayAdapter<Contact> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, contacts);
         listView.setAdapter(adapter);
     }
 }
