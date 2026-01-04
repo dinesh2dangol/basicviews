@@ -12,11 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BasicViews">
         <activity
+            android:name=".MemberActivity"
+            android:exported="false" />
+        <activity
             android:name=".DisplayActivity"
             android:exported="false" />
         <activity
             android:name=".FoodActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".TopLevelActivity"
             android:exported="true">

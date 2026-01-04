@@ -80,6 +80,24 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public ArrayList<String> getAllContacts() {
+        ArrayList<String> contactList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + CONTACTS_TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                String phone = cursor.getString(cursor.getColumnIndex("phone"));
+                contactList.add(name + " - " + phone);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return contactList;
+    }
+
     public Integer deleteContact (Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("contacts",

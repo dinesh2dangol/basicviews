@@ -68,8 +68,8 @@
     <string-array name="options">
         <item>Soft Drinks</item>
         <item>Food</item>
-        <item>Stores</item>
-        <item>Colleges</item>
+        <item>Contacts</item>
+        <item>Add Contact</item>
     </string-array>
     <string-array name="food_options">
         <item>Momo</item>

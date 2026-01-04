@@ -29,8 +29,12 @@ public class TopLevelActivity extends AppCompatActivity {
                     Intent intent = new Intent(TopLevelActivity.this, FoodActivity.class);
                     intent.putExtra("name","Ram");
                     startActivity(intent);
+                }else if(position==2){
+                    Intent intent = new Intent(TopLevelActivity.this, MemberActivity.class);
+                    intent.putExtra("name","Ram");
+                    startActivity(intent);
                 }
-                else if(position==2){
+                else if(position==3){
                     Bundle dataBundle = new Bundle();
                     dataBundle.putInt("id", 0);
 
