@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -101,7 +102,9 @@ public class NotificationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"not available", Toast.LENGTH_SHORT).show();
                     tv1.setText("internet not available");
                 }
-                fetchProduct();
+//                fetchProduct();
+                fetchJsonUsingTask();
+//                fetchJson();
 
                 //adb shell svc wifi enable
                 //adb shell svc data enable
@@ -195,6 +198,48 @@ public class NotificationActivity extends AppCompatActivity {
                 );
             }
         });
+    }
+
+    private void fetchJsonUsingTask() {
+        new FetchJsonTask().execute();
+    }
+    private class FetchJsonTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            StringBuilder result = new StringBuilder();
+
+            try {
+                URL url = new URL("https://dummyjson.com/products/2");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(10000);
+                conn.setReadTimeout(10000);
+
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream())
+                );
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+
+                reader.close();
+                conn.disconnect();
+
+                return result.toString();
+
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            tv1.setText(result);
+        }
     }
 
 
