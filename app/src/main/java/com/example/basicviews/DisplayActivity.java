@@ -140,20 +140,6 @@ public class DisplayActivity extends Activity {
     }
 
     public void run(View view) {
-        Bundle extras = getIntent().getExtras();
-        if(extras !=null) {
-            int Value = extras.getInt("id");
-            if(Value>0){
-                if(mydb.updateContact(id_To_Update,name.getText().toString(),
-                        phone.getText().toString(), "",
-                        "", "")){
-                    Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
-                } else{
-                    Toast.makeText(getApplicationContext(), "not Updated", Toast.LENGTH_SHORT).show();
-                }
-            } else{
                 if(mydb.insertContact(name.getText().toString(), phone.getText().toString(),
                         "","","")){
                     Toast.makeText(getApplicationContext(), "done",
@@ -164,7 +150,7 @@ public class DisplayActivity extends Activity {
                 }
                 Intent intent = new Intent(getApplicationContext(),TopLevelActivity.class);
                 startActivity(intent);
-            }
-        }
+
+
     }
 }

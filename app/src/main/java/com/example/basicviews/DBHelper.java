@@ -68,7 +68,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateContact (Integer id, String name, String phone, String email, String street,String place) {
+    public boolean updateContact2 (Integer id, String name, String phone, String email, String street,String place) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -78,6 +78,17 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("place", place);
         db.update("contacts", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
         return true;
+    }
+
+    public boolean updateContact(int id, String newName, String newPhone) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", newName);
+        values.put("phone", newPhone);
+
+        int result = db.update(CONTACTS_TABLE_NAME, values, CONTACTS_COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+        return result > 0;
     }
 
     public ArrayList<Contact> getAllContacts() {
