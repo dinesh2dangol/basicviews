@@ -3,6 +3,8 @@ package com.example.basicviews;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -85,6 +87,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[] { Integer.toString(id) });
     }
 
+    @SuppressLint("Range")
     public ArrayList<String> getAllCotacts() {
         ArrayList<String> array_list = new ArrayList<String>();
 

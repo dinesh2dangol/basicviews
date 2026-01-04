@@ -31,11 +31,8 @@ public class DisplayActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
-        name = (TextView) findViewById(R.id.editTextName);
-        phone = (TextView) findViewById(R.id.editTextPhone);
-        email = (TextView) findViewById(R.id.editTextStreet);
-        street = (TextView) findViewById(R.id.editTextEmail);
-        place = (TextView) findViewById(R.id.editTextCity);
+        name = (TextView) findViewById(R.id.editName);
+        phone = (TextView) findViewById(R.id.editPhone);
 
         mydb = new DBHelper(this);
 
@@ -51,14 +48,11 @@ public class DisplayActivity extends Activity {
 
                 String nam = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_NAME));
                 String phon = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_PHONE));
-                String emai = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_EMAIL));
-                String stree = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_STREET));
-                String plac = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_CITY));
 
                 if (!rs.isClosed())  {
                     rs.close();
                 }
-                Button b = (Button)findViewById(R.id.button1);
+                Button b = (Button)findViewById(R.id.buttonSave);
                 b.setVisibility(View.INVISIBLE);
 
                 name.setText((CharSequence)nam);
@@ -68,18 +62,6 @@ public class DisplayActivity extends Activity {
                 phone.setText((CharSequence)phon);
                 phone.setFocusable(false);
                 phone.setClickable(false);
-
-                email.setText((CharSequence)emai);
-                email.setFocusable(false);
-                email.setClickable(false);
-
-                street.setText((CharSequence)stree);
-                street.setFocusable(false);
-                street.setClickable(false);
-
-                place.setText((CharSequence)plac);
-                place.setFocusable(false);
-                place.setClickable(false);
             }
         }
     }
@@ -163,8 +145,8 @@ public class DisplayActivity extends Activity {
             int Value = extras.getInt("id");
             if(Value>0){
                 if(mydb.updateContact(id_To_Update,name.getText().toString(),
-                        phone.getText().toString(), email.getText().toString(),
-                        street.getText().toString(), place.getText().toString())){
+                        phone.getText().toString(), "",
+                        "", "")){
                     Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
@@ -173,15 +155,14 @@ public class DisplayActivity extends Activity {
                 }
             } else{
                 if(mydb.insertContact(name.getText().toString(), phone.getText().toString(),
-                        email.getText().toString(), street.getText().toString(),
-                        place.getText().toString())){
+                        "","","")){
                     Toast.makeText(getApplicationContext(), "done",
                             Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(getApplicationContext(), "not done",
                             Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(),TopLevelActivity.class);
                 startActivity(intent);
             }
         }
