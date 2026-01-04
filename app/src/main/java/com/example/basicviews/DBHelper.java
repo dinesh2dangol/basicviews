@@ -100,6 +100,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return contactList;
     }
 
+    public boolean deleteContactById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(CONTACTS_TABLE_NAME, CONTACTS_COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+        return result > 0;
+    }
+
     public Integer deleteContact (Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("contacts",
