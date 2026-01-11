@@ -56,13 +56,17 @@ public class CategoriesActivity extends AppCompatActivity {
                     for (Category c : categories) {
                         names.add(c.name);
                     }
+                    List<String> displayNames = new ArrayList<>();
+                    for (Category c: categories){
+                        displayNames.add(c.name + "\n" + c.url);
+                    }
                     Log.e("sss", "Category names: " + names);
 
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(
                             CategoriesActivity.this,
                             android.R.layout.simple_list_item_1,
-                            names
+                            displayNames
                     );
 
                     listView.setAdapter(adapter);

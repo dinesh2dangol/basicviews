@@ -38,7 +38,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = list.get(position);
 
         holder.txtTitle.setText(product.title);
-        holder.txtPrice.setText("Rs. " + product.price);
+        holder.txtPrice.setText("$. " + product.price);
 
         // Load image using Glide
         Glide.with(context)

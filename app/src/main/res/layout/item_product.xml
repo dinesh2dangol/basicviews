@@ -4,14 +4,12 @@
     android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
     <ImageView
         android:id="@+id/imgProduct"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="centerCrop"
         android:layout_marginEnd="12dp" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -33,5 +31,6 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
 
 </LinearLayout>
